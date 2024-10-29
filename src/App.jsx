@@ -20,6 +20,7 @@ import ViewNeptune from "./pages/ViewNeptune";
 import Test from "./pages/Test";
 import Register from './components/Register';
 import Login from './components/Login';
+import SolarSystem from './pages/Pokus';
 
 import "./App.css";
 import ViewSolarSystem from './pages/ViewSolarSystem';
@@ -59,6 +60,8 @@ function App() {
           <Route path="/exclusive" element={<Exclusive />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+
+          <Route path="/solar-system" element={<SolarSystem />} />
 
           {isAuthenticated && (
             <Route path="/models" element={<Models />}>

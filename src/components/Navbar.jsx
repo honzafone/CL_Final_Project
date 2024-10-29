@@ -22,7 +22,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <header className="fixed right-0 top-0 p-0 z-10 bg-customAccent bg-opacity-40 ">
+        <header className="fixed right-0 top-0 p-0 z-[1000] bg-customAccent bg-opacity-40 ">
             <nav className="w-80% flex justify-end text-lg gap-5 font-medium">
                 <NavLink to="/" className={({ isActive }) => isActive
                     ? "p-2 text-customPrimary bg-customDark text-shadow border-s-2 border-e-2 border-customPrimary"

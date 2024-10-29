@@ -1,11 +1,15 @@
 import React from 'react';
 import StarBackground from '../components/StarBackground';
+import SpaceCoreCanvas from '../models/SpaceCore';
 
 const Exclusive = () => {
-  return (
+  return (<div className="text-customSecondary-500 min-h-screen flex flex-col items-center relative z-10">
+      <SpaceCoreCanvas/>
+    {/* Zbytek obsahu */}
+
     <div className="min-h-screen relative -z-10">
       <StarBackground />
-      <div className="text-customSecondary-500 min-h-screen flex flex-col items-center relative z-10">
+      <div className="text-customSecondary-500 min-h-screen flex flex-col items-center relative z-20">
         
         {/* Hero Section */}
         <header className="flex flex-col items-center mt-20 pb-10 text-center">
@@ -45,6 +49,7 @@ const Exclusive = () => {
           </p>
         </section>
       </div>
+    </div>
     </div>
   );
 };
