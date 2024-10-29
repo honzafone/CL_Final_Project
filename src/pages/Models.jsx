@@ -145,7 +145,7 @@ const Models = () => {
             </div>
 
             {/* Burger menu button */}
-            <div className="p-4 z-50 md:hidden">
+            <div className="p-4 z-50 md:hidden mt-10">
                 <button
                     onClick={toggleMenu}
                     className="text-customSecondary bg-customDark  p-2 rounded-md focus:outline-none"
@@ -156,7 +156,7 @@ const Models = () => {
 
             {/* Burger menu pro malá zařízení */}
             {menuOpen && (
-                <div ref={menuRef} className="absolute top-0 left-0 h-auto w-[50%] bg-customDark shadow-md z-50 md:hidden bg-opacity-30 mt-20 ml-5 text-4xl">
+                <div ref={menuRef} className="absolute top-0 left-0 h-auto w-[50%] bg-customDark shadow-md z-50 md:hidden bg-opacity-30 mt-30 ml-5 text-4xl">
                     <nav className="p-4 flex flex-col gap-1 h-auto ">
                         <NavLink to="/models/mercury" className={({ isActive }) =>
                             isActive
