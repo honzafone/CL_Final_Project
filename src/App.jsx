@@ -61,11 +61,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
 
-          <Route path="/solar-system" element={<SolarSystem />} />
 
           {isAuthenticated && (
             <Route path="/models" element={<Models />}>
-              <Route index element={<ViewSolarSystem />} />
+              {/* <Route index element={<ViewSolarSystem />} /> */}
+              <Route index element={<SolarSystem />} />
               <Route path="mercury" element={<ViewMercury />} />
               <Route path="venus" element={<ViewVenus />} />
               <Route path="earth" element={<ViewEarth />} /> 
