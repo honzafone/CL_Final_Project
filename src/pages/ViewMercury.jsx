@@ -45,7 +45,8 @@ function ViewMercury() {
             <PlanetDescription 
                 planetData={planetData} 
                 showDescription={showDescription}
-                customText="Toto je vlastní popis pro tuto planetu."  />
+                // customText="Toto je vlastní popis pro tuto planetu."  
+                />
             <MercuryModel />
         </div>
     );

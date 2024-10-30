@@ -39,8 +39,9 @@ function Sun() {
 export default function SunModel() {
   return (
     <Canvas style={{ height: '100vh' }}>
-      <ambientLight intensity={0.2} /> {/* Slabé ambientní světlo */}
-      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <ambientLight intensity={1} /> {/* Slabé ambientní světlo */}
+      {/* <directionalLight position={[5, 5, 5]} intensity={0} /> */}
+      <directionalLight position={[0, 0, 0]} intensity={2} color="yellow" />
       <Sun />
       <OrbitControls />
     </Canvas>

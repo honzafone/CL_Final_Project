@@ -17,7 +17,7 @@ export default function MercuryModel() {
     return (
         <Canvas style={{ height: '100vh' }}>
             <ambientLight intensity={0.2} /> {/* Slabé ambientní světlo */}
-            <directionalLight position={[1, 1, 1]} intensity={3} />
+            <directionalLight position={[1, 1, 1]} intensity={1} />
             <Mercury />
             <OrbitControls />
         </Canvas>

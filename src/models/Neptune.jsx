@@ -17,7 +17,7 @@ export default function NeptuneModel() {
     return (
         <Canvas style={{ height: '100vh' }}>
             <ambientLight intensity={0.2} />
-            <directionalLight position={[1, 1, 1]} intensity={3} />
+            <directionalLight position={[1, 1, 1]} intensity={1.9} />
             <Neptune />
             <OrbitControls />
         </Canvas>

@@ -20,10 +20,10 @@ import ViewNeptune from "./pages/ViewNeptune";
 import Test from "./pages/Test";
 import Register from './components/Register';
 import Login from './components/Login';
-import SolarSystem from './pages/Pokus';
 
 import "./App.css";
-import ViewSolarSystem from './pages/ViewSolarSystem';
+// import ViewSolarSystem from './pages/ViewSolarSystem';
+import SolarSystem from './pages/Pokus';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,7 +64,6 @@ function App() {
 
           {isAuthenticated && (
             <Route path="/models" element={<Models />}>
-              {/* <Route index element={<ViewSolarSystem />} /> */}
               <Route index element={<SolarSystem />} />
               <Route path="mercury" element={<ViewMercury />} />
               <Route path="venus" element={<ViewVenus />} />

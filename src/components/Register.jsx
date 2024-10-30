@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
-import StarBackground from '../components/StarBackground'; // Ujistěte se, že cesta odpovídá umístění souboru
+import { Link } from 'react-router-dom';
+import StarBackground from '../components/StarBackground';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -10,7 +11,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Registrace uživatele pomocí autentizačního systému Supabase
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -21,11 +21,12 @@ function Register() {
       console.error(error.message);
     } else {
       alert('Registrace úspěšná! Zkontrolujte svůj e-mail pro potvrzení.');
+      setError(null);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+    <div className="flex items-center justify-center min-h-screen">
       <StarBackground />
       <div className="w-full max-w-md bg-customMuted p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-center text-customSecondary">Registration</h2>
@@ -46,12 +47,18 @@ function Register() {
           />
           <button
             type="submit"
-            className="w-full py-3 bg-customSecondary text-white rounded-md hover:bg-customSecondary-500 transition duration-300 "
+            className="w-full py-3 bg-customSecondary text-white rounded-md hover:bg-customSecondary-500 transition duration-300"
           >
             Register
           </button>
           {error && <p className="text-red-500 text-center">{error}</p>}
         </form>
+        <p className="text-center mt-4 text-customSecondary">
+          Are you already registered?{' '}
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Log in here
+          </Link>
+        </p>
       </div>
     </div>
   );
