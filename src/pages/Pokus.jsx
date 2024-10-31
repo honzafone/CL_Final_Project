@@ -26,13 +26,14 @@ function Planet({ model, orbitRadius, scale, speed, initialAngle, onClick, name 
     const { scene } = useGLTF(model);
     const planetRef = React.useRef();
     const [isHovered, setIsHovered] = useState(false);
-    let angle = initialAngle;
+    const [currentAngle, setCurrentAngle] = useState(initialAngle);
 
     useFrame(() => {
         if (!isHovered) {
-            angle += speed;
-            planetRef.current.position.x = orbitRadius * Math.cos(angle);
-            planetRef.current.position.z = orbitRadius * Math.sin(angle);
+            const newAngle = currentAngle + speed;
+            setCurrentAngle(newAngle);
+            planetRef.current.position.x = orbitRadius * Math.cos(newAngle);
+            planetRef.current.position.z = orbitRadius * Math.sin(newAngle);
         }
     });
 
@@ -48,15 +49,13 @@ function Planet({ model, orbitRadius, scale, speed, initialAngle, onClick, name 
                     document.body.style.cursor = 'pointer';
                 }}
                 onPointerOut={() => {
-                    setTimeout(() => {
-                        setIsHovered(false);
-                        document.body.style.cursor = 'auto';
-                    }, 100);
+                    setIsHovered(false);
+                    document.body.style.cursor = 'auto';
                 }}
             />
             {isHovered && (
-                <Html distanceFactor={10} >
-                    <div className=" p-0 rounded text-customPrimary text-center fixed bottom-[00%] left-0 transform -translate-x-1/2 -translate-y-[-50%]">
+                <Html distanceFactor={10}>
+                    <div className="p-0 rounded text-customPrimary text-center fixed bottom-[00%] left-0 transform -translate-x-1/2 -translate-y-[-50%]">
                         {name}
                     </div>
                 </Html>
@@ -83,7 +82,11 @@ export default function SolarSystem() {
 
     return (
         <div className="relative w-full h-full bg-black">
-            {loading && <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">Loading Solar System...</div>}
+            {loading && (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-2xl">
+                    Loading Solar System...
+                </div>
+            )}
             <Canvas
                 style={{ width: '100vw', height: '100vh' }}
                 onCreated={() => setLoading(false)}

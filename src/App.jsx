@@ -57,12 +57,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/exclusive" element={<Exclusive />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/exclusive" element={<Exclusive />} />
 
 
-          {isAuthenticated && (
+          
             <Route path="/models" element={<Models />}>
               <Route index element={<SolarSystem />} />
               <Route path="mercury" element={<ViewMercury />} />
@@ -76,7 +76,7 @@ function App() {
               <Route path="test" element={<Test />} />  
               <Route path="sun" element={<ViewSun />} />  
             </Route>
-          )}
+          
         </Routes>
 
         {/* Zobrazení stavu přihlášení v pravém dolním rohu jako NavLink */}

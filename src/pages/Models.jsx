@@ -156,8 +156,8 @@ const Models = () => {
 
             {/* Burger menu pro malá zařízení */}
             {menuOpen && (
-                <div ref={menuRef} className="absolute top-0 left-0 h-auto w-[50%] bg-customDark shadow-md z-50 md:hidden bg-opacity-30 mt-30 ml-5 text-4xl">
-                    <nav className="p-4 flex flex-col gap-1 h-auto ">
+                <div ref={menuRef} className="absolute top-[50%] left-[50%] mt-[25%] ml-[-25%] h-auto w-[50%] bg-customDark shadow-md z-50 md:hidden bg-opacity-30  text-4xl">
+                    <nav className="p-4 flex flex-col gap-1 h-auto">
                         <NavLink to="/models/mercury" className={({ isActive }) =>
                             isActive
                                 ?

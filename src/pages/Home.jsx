@@ -49,8 +49,11 @@ const Home = () => {
           <p className="px-4 mb-6 max-w-xl mx-auto">
             Whether you're a space enthusiast or just curious about our universe, our platform offers something for everyone. Sign up for updates and become part of our cosmic community.
           </p>
-          <NavLink to="/register" className={button +" px-6 py-3"}>
+          <NavLink to="/register" className={button +" px-6 py-3 mx-2"}>
             Register Now
+          </NavLink>
+          <NavLink to="/login" className={button +" px-6 py-3 mx-2"}>
+            Log In
           </NavLink>
         </section>
       </div>
