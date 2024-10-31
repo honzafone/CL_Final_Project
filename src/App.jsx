@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes, NavLink } from 'react-router-dom';
 import Navbar from "./components/Navbar";
-import { supabase } from './supabaseClient';
+import { auth } from './firebase'; // Ujistěte se, že máte správnou cestu
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 import About from "./pages/About";
 import Home from "./pages/Home";
@@ -22,30 +23,22 @@ import Register from './components/Register';
 import Login from './components/Login';
 
 import "./App.css";
-// import ViewSolarSystem from './pages/ViewSolarSystem';
 import SolarSystem from './pages/Pokus';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const checkAuthStatus = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setIsAuthenticated(!!session);
-    };
-    checkAuthStatus();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      setIsAuthenticated(!!session);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
     });
 
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, []);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await signOut(auth);
     setIsAuthenticated(false);
     window.location.assign('/');
   };
@@ -60,23 +53,19 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/exclusive" element={<Exclusive />} />
-
-
-          
-            <Route path="/models" element={<Models />}>
-              <Route index element={<SolarSystem />} />
-              <Route path="mercury" element={<ViewMercury />} />
-              <Route path="venus" element={<ViewVenus />} />
-              <Route path="earth" element={<ViewEarth />} /> 
-              <Route path="mars" element={<ViewMars />} />
-              <Route path="jupiter" element={<ViewJupiter />} />
-              <Route path="saturn" element={<ViewSaturn />} />
-              <Route path="uranus" element={<ViewUranus />} />
-              <Route path="neptune" element={<ViewNeptune />} />
-              <Route path="test" element={<Test />} />  
-              <Route path="sun" element={<ViewSun />} />  
-            </Route>
-          
+          <Route path="/models" element={<Models />}>
+            <Route index element={<SolarSystem />} />
+            <Route path="mercury" element={<ViewMercury />} />
+            <Route path="venus" element={<ViewVenus />} />
+            <Route path="earth" element={<ViewEarth />} /> 
+            <Route path="mars" element={<ViewMars />} />
+            <Route path="jupiter" element={<ViewJupiter />} />
+            <Route path="saturn" element={<ViewSaturn />} />
+            <Route path="uranus" element={<ViewUranus />} />
+            <Route path="neptune" element={<ViewNeptune />} />
+            <Route path="test" element={<Test />} />  
+            <Route path="sun" element={<ViewSun />} />  
+          </Route>
         </Routes>
 
         {/* Zobrazení stavu přihlášení v pravém dolním rohu jako NavLink */}

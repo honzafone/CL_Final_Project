@@ -18,7 +18,7 @@ const About = () => {
     e.preventDefault();
     const { name, email, subject, message } = formData;
 
-    const { error } = await supabase.from('users').insert([{ name, email, subject, message }]);
+    const { error } = await supabase.from('contact_form').insert([{ name, email, subject, message }]);
     if (error) {
       setStatus('Something went wrong, please try again.');
     } else {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient';
+import { auth } from '../firebase.jsx'; // Ujistěte se, že máte správnou cestu
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
 import StarBackground from '../components/StarBackground';
 
@@ -12,18 +13,13 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert('Přihlášení úspěšné!');
+      navigate('/'); // Přejde na úvodní stránku po úspěšném přihlášení
+    } catch (error) {
       setError('Chyba při přihlášení. Zkontrolujte email a heslo.');
       console.error(error.message);
-    } else {
-      alert('Přihlášení úspěšné!');
-      setError(null);
-      navigate('/'); // Přejde na úvodní stránku po úspěšném přihlášení
     }
   };
 

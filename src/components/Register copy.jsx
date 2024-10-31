@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase.jsx'; // Ujistěte se, že máte správnou cestu
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
+import { Link } from 'react-router-dom';
 import StarBackground from '../components/StarBackground';
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert('Registrace úspěšná! Zkontrolujte svůj e-mail pro potvrzení.');
-      navigate('/login'); // Přejde na přihlašovací stránku po úspěšné registraci
-      setError(null);
-    } catch (error) {
-      setError('Chyba při registraci uživatele: ' + error.message);
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError('Chyba při registraci uživatele.');
       console.error(error.message);
+    } else {
+      alert('Registrace úspěšná! Zkontrolujte svůj e-mail pro potvrzení.');
+      setError(null);
     }
   };
 

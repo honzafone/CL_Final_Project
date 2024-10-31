@@ -1,28 +1,22 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient';
+import { auth } from '../firebase.jsx'; // Ujistěte se, že máte správnou cestu
+import { onAuthStateChanged } from "firebase/auth";
 
 const Navbar = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        const checkAuthStatus = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            setIsAuthenticated(!!session);
-        };
-        checkAuthStatus();
-
-        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-            setIsAuthenticated(!!session);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsAuthenticated(!!user);
         });
 
-        return () => {
-            authListener.subscription.unsubscribe();
-        };
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
     }, []);
 
     return (
-        <header className="fixed right-0 top-0 p-0 z-[1000] bg-customAccent bg-opacity-40 ">
+        <header className="fixed right-0 top-0 p-0 z-[1000] bg-customAccent bg-opacity-40">
             <nav className="w-80% flex justify-end text-lg gap-5 font-medium">
                 <NavLink to="/" className={({ isActive }) => isActive
                     ? "p-2 text-customPrimary bg-customDark text-shadow border-s-2 border-e-2 border-customPrimary"
