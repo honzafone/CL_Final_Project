@@ -15,8 +15,8 @@ function Register() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert('Registrace úspěšná! Zkontrolujte svůj e-mail pro potvrzení.');
-      navigate('/login'); // Přejde na přihlašovací stránku po úspěšné registraci
+      alert('Registrace úspěšná!');
+      navigate('/'); // Přejde na uvodni stránku po úspěšné registraci
       setError(null);
     } catch (error) {
       setError('Chyba při registraci uživatele: ' + error.message);
