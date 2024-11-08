@@ -4,9 +4,9 @@ import SpaceCoreCanvas from '../models/SpaceCore';
 
 const Exclusive = () => {
   return (<div className="text-customSecondary-500 min-h-screen flex flex-col items-center relative z-10">
-      <SpaceCoreCanvas/>
-    {/* Zbytek obsahu */}
+    {/* BACKGOUND AND MODEL */}
 
+      <SpaceCoreCanvas/> 
     <div className="min-h-screen relative -z-10">
       <StarBackground />
       <div className="text-customSecondary-500 min-h-screen flex flex-col items-center relative z-20">

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'; 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useAnimations } from '@react-three/drei';
-import * as THREE from 'three'; // Import THREE pro loop nastavení
+import * as THREE from 'three'; // Import THREE for loop settings
 import solar_systemModel from '../assets/3D/solar_system.glb';
 
 function SolarSystem() {
@@ -9,15 +9,15 @@ function SolarSystem() {
   const { actions } = useAnimations(animations, scene);
 
   useEffect(() => {
-    console.log('Scene:', scene); // Vypíše obsah celé scény
-    console.log('Available animations:', animations); // Vypíše všechny animace
-    console.log('Actions:', actions); // Vypíše akce pro jednotlivé animace, pokud existují
+    console.log('Scene:', scene); // Logs the entire scene content
+    console.log('Available animations:', animations); // Logs all animations
+    console.log('Actions:', actions); // Logs actions for each animation, if available
 
-    // Pustí animaci a nastaví ji na nekonečné opakování
+    // Plays the animation and sets it to loop infinitely
     if (actions.DefaultTake) {
-            // actions.DefaultTake.setLoop(THREE.LoopRepeat); // Nastavení na nekonečné opakování
+      // actions.DefaultTake.setLoop(THREE.LoopRepeat); // Sets to infinite loop
       actions.DefaultTake.play();
-      actions.DefaultTake.timeScale = 0.05; // Nastavení rychlosti animace
+      actions.DefaultTake.timeScale = 0.05; // Sets animation speed
     }
 
     scene.traverse((child) => {

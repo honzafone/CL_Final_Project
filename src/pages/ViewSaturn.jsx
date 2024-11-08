@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import SaturnModel from '../models/Saturn';  // Importuj komponentu
+import SaturnModel from '../models/Saturn';
 import PlanetDescription from '../components/PlanetDescription';
 
 function ViewSaturn() {
     const [planetData, setPlanetData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showDescription, setShowDescription] = useState(false); // Stav pro zobrazení popisu
+    const [showDescription, setShowDescription] = useState(false); // State to control animation
 
     useEffect(() => {
-        // Funkce pro načtení dat z API
+        // Function to fetch data from the API
         const fetchPlanetData = async () => {
           try {
             const response = await fetch('https://api.le-systeme-solaire.net/rest/bodies/saturn');
     
             if (!response.ok) {
-              throw new Error('Chyba při načítání dat');
+              throw new Error('Error fetching data');
             }
     
             const data = await response.json();
-            setPlanetData(data); // Předpokládáme, že API vrátí pole, takže bereme první objekt
-            setShowDescription(true); // Zobrazit popis po načtení dat
+            setPlanetData(data); // Assuming API returns an object, so we use the data directly
+            setShowDescription(true); // Show description after data is loaded
           } catch (err) {
             setError(err.message);
           } finally {

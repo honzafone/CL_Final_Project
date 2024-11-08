@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase.jsx'; // Ujistěte se, že máte správnou cestu
+import { auth } from '../firebase.jsx'; // Data for firebase
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
 import StarBackground from '../components/StarBackground';
@@ -16,9 +16,9 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert('Přihlášení úspěšné!');
-      navigate('/'); // Přejde na úvodní stránku po úspěšném přihlášení
+      navigate('/'); // navigate to home page after login
     } catch (error) {
-      setError('Chyba při přihlášení. Zkontrolujte email a heslo.');
+      setError('Login error. Please check your email and password.');
       console.error(error.message);
     }
   };
@@ -38,7 +38,7 @@ function Login() {
           />
           <input
             type="password"
-            placeholder="Heslo"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-customSecondary bg-customDark"

@@ -14,7 +14,7 @@ const TypingEffect = ({ text, speed }) => {
 
         const intervalId = setInterval(printText, speed);
 
-        return () => clearInterval(intervalId); // vyčistí interval při unmountu
+        return () => clearInterval(intervalId); // clears interval on unmount
     }, [idLetter, text, speed]);
 
     return (
@@ -22,9 +22,9 @@ const TypingEffect = ({ text, speed }) => {
             id="text"
             style={{
                 fontFamily: 'monospace',
-                whiteSpace: 'pre-wrap', // povolí zalamování textu
-                wordWrap: 'break-word', // zajistí, že se dlouhá slova zalamují
-                width: '100%', // nebo nastavte konkrétní šířku podle potřeby
+                whiteSpace: 'pre-wrap', // allows text wrapping
+                wordWrap: 'break-word', // ensures long words wrap
+                width: '100%', // or set a specific width as needed
             }}
         >
             {displayedText}

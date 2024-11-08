@@ -1,53 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import UranusModel from '../models/Uranus';  // Importuj komponentu
+import UranusModel from '../models/Uranus';
 import PlanetDescription from '../components/PlanetDescription';
 
 function ViewUranus() {
-    const [planetData, setPlanetData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [showDescription, setShowDescription] = useState(false); // Stav pro zobrazení popisu
+  const [planetData, setPlanetData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showDescription, setShowDescription] = useState(false); // State to control animation
 
-    useEffect(() => {
-        // Funkce pro načtení dat z API
-        const fetchPlanetData = async () => {
-          try {
-            const response = await fetch('https://api.le-systeme-solaire.net/rest/bodies/uranus');
-    
-            if (!response.ok) {
-              throw new Error('Chyba při načítání dat');
-            }
-    
-            const data = await response.json();
-            setPlanetData(data); // Předpokládáme, že API vrátí pole, takže bereme první objekt
-            setShowDescription(true); // Zobrazit popis po načtení dat
-          } catch (err) {
-            setError(err.message);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchPlanetData();
-      }, []);
-    
-    if (loading) {
-        return <div>Loading...</div>;
-      }
-    
-      if (error) {
-        return <div>Error: {error}</div>;
-      }
+  useEffect(() => {
+    // Function to fetch data from the API
+    const fetchPlanetData = async () => {
+      try {
+        const response = await fetch('https://api.le-systeme-solaire.net/rest/bodies/uranus');
 
-    return (
-        <div>
-            {console.log(planetData)}
-            <PlanetDescription 
-                planetData={planetData} 
-                showDescription={showDescription} />
-            <UranusModel />
-        </div>
-    );
+        if (!response.ok) {
+          throw new Error('Error fetching data');
+        }
+
+        const data = await response.json();
+        setPlanetData(data); // Assuming API returns an object, so we use the data directly
+        setShowDescription(true); // Show description after data is loaded
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlanetData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div>
+      {console.log(planetData)}
+      <PlanetDescription
+        planetData={planetData}
+        showDescription={showDescription} />
+      <UranusModel />
+    </div>
+  );
 }
 
 export default ViewUranus;

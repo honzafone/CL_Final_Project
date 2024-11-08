@@ -1,6 +1,6 @@
 const PlanetDescription = ({ planetData, showDescription, customText }) => (
 
-  // Vlož komponentu s popisem
+  // component for description
   <div className={`description z-10 fixed bottom-5 left-32rem pl-5 text-customPrimary ${showDescription ? 'fade-in' : ''}`}>
     <h1 className='text-3xl font-bold text-shadow'>
       {planetData

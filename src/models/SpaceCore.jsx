@@ -9,9 +9,9 @@ function SpaceCore() {
 
     useFrame(() => {
         if (spaceCoreRef.current) {
-            spaceCoreRef.current.position.x += 0.005; // Pohyb doprava
-            spaceCoreRef.current.position.y = Math.sin(spaceCoreRef.current.position.x) * 0.5; // Pohyb nahoru a dolů
-            if (spaceCoreRef.current.position.x > 5) spaceCoreRef.current.position.x = -5; // Reset pozice
+            spaceCoreRef.current.position.x += 0.005; // move right
+            spaceCoreRef.current.position.y = Math.sin(spaceCoreRef.current.position.x) * 0.5; // move up and down
+            if (spaceCoreRef.current.position.x > 5) spaceCoreRef.current.position.x = -5; // Reset
         }
     });
 
@@ -28,7 +28,7 @@ export default function SpaceCoreCanvas() {
             style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -5 }}
             camera={{ position: [0, 0, 5], zoom: 1 }}
         >
-            <ambientLight intensity={0.2} /> {/* Ambientní světlo */}
+            <ambientLight intensity={0.2} /> {/* Ambient light */}
             <directionalLight position={[1, 1, 1]} intensity={3} />
             <SpaceCore />
         </Canvas>

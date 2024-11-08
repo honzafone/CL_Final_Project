@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useAnimations } from '@react-three/drei';
 import earthModel from '../assets/3D/earth.glb';
 
@@ -22,10 +22,14 @@ function Earth() {
     });
   }, [scene, actions]);
 
+  // rotation of the planet
+  useFrame(() => {
+    scene.rotation.y -= 0.0001; // change of the rotation speed
+  });
+
   return (
-    // Vytvoř group a posuň pouze model uvnitř group
     <group>
-      <primitive object={scene} scale={0.0017} position={[0, 0, 0]} /> 
+      <primitive object={scene} scale={0.0017} position={[0, 0, 0]} />
     </group>
   );
 }

@@ -6,21 +6,21 @@ function ViewSun() {
   const [sunData, setSunData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showDescription, setShowDescription] = useState(false); // Stav pro zobrazení popisu
+  const [showDescription, setShowDescription] = useState(false); // State to control animation
 
   useEffect(() => {
-    // Funkce pro načtení dat z API
+    // Function to fetch data from the API
     const fetchSunData = async () => {
       try {
-        const response = await fetch('https://api.le-systeme-solaire.net/rest/bodies/soleil'); // API endpoint pro Slunce
+        const response = await fetch('https://api.le-systeme-solaire.net/rest/bodies/soleil'); // API endpoint SUN
 
         if (!response.ok) {
-          throw new Error('Chyba při načítání dat');
+          throw new Error('Error fetching data');
         }
 
         const data = await response.json();
-        setSunData(data); // Data jsou přímo v objektu
-        setShowDescription(true); // Zobrazit popis po načtení dat
+        setSunData(data); // Data in object form, so we use the data directly
+        setShowDescription(true); // Show description after data is loaded
       } catch (err) {
         setError(err.message);
       } finally {
@@ -43,7 +43,7 @@ function ViewSun() {
     <div>
       {console.log(sunData)}
       <SunDescription sunData={sunData} showDescription={showDescription} />
-      <SunModel />  {/* Vlož komponentu s modelem Slunce */}
+      <SunModel />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+//LOADER FOR LOADING MODELS
 import { Html } from '@react-three/drei'
 
 const Loader = () => {

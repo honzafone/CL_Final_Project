@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase.jsx'; // Ujistěte se, že máte správnou cestu
+import { auth } from '../firebase.jsx'; // Data for firebase
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from 'react-router-dom';
 import StarBackground from '../components/StarBackground';
@@ -15,11 +15,11 @@ function Register() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert('Registrace úspěšná!');
-      navigate('/'); // Přejde na uvodni stránku po úspěšné registraci
+      alert('Registration successful!');
+      navigate('/'); // navigate to home page after registration
       setError(null);
     } catch (error) {
-      setError('Chyba při registraci uživatele: ' + error.message);
+      setError('Registration error: ' + error.message);
       console.error(error.message);
     }
   };
